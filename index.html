@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pivot Point Hackathon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="main-body" class="bg-central-perk">
+
+    <!-- Sidebar Navigation (Chalkboard Menu Style) -->
+    <nav class="sidebar menu-card" id="sidebar">
+        <div class="menu-inner-border"></div>
+        <div class="sidebar-header">
+            <button id="closeSidebar" class="close-btn">&times;</button>
+        </div>
+        <div class="menu-title">
+            <h2>~ Menu ~</h2>
+            <div class="menu-divider">☕</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="nav-item active chalk-pink" data-section="home">Home</a></li>
+            <li><a href="#" class="nav-item chalk-blue" data-section="about">About the Event</a></li>
+            <li><a href="#" class="nav-item chalk-yellow" data-section="register">Register Now</a></li>
+            <li><a href="#" class="nav-item chalk-green" data-section="help">Help</a></li>
+            <li><a href="#" class="nav-item chalk-orange" data-section="faq">FAQs</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+        <header class="main-header">
+            <button id="openSidebar" class="menu-btn">&#9776;</button>
+        </header>
+
+        <main class="content-container">
+            <!-- SECTION 1: HOME -->
+            <section id="home-section" class="content-section active home-centered">
+                <div class="hero-title">
+                    <h1 class="friends-title">
+                        P<span class="dot red">•</span>I<span class="dot blue">•</span>V<span class="dot yellow">•</span>O<span class="dot red">•</span>T
+                        &nbsp;
+                        P<span class="dot blue">•</span>O<span class="dot yellow">•</span>I<span class="dot red">•</span>N<span class="dot blue">•</span>T
+                    </h1>
+                    <h3 class="tagline">Could this BE any more innovative?</h3>
+                </div>
+            </section>
+
+            <!-- SECTION 2: ABOUT -->
+            <section id="about-section" class="content-section">
+                <div class="center-wrapper">
+                    <div class="info-card">
+                        <h2>About Pivot Point</h2>
+                        <p class="friends-quote">"It’s a metaphor! You see, the code is like the girl in the veil..."</p>
+                        <p>Dive deep into 8 hours of uninterrupted innovation. Pivot Point is where ideas come to life, or at least, where we try to get them to compile. Starts sharp at 9 AM! Swags and Refreshments for everyone. And if you face any issues, don't worry we'll be there for you!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: REGISTER -->
+            <section id="register-section" class="content-section">
+                <div class="center-wrapper">
+                    <p class="friends-quote form-quote">"I'm gonna integrate, and compile, and I'm gonna have a working prototype... and I don't care about the warnings!"</p>
+                    
+                    <!-- MAIN REGISTRATION FORM -->
+                    <form id="hackathonForm">
+                        
+                        <!-- Team Identity Section -->
+                        <section class="form-card team-section">
+                            <h2>The One With The Team Identity</h2>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="teamName">Team Name *</label>
+                                    <input type="text" id="teamName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="teamPin">Unique PIN (To edit later) *</label>
+                                    <input type="password" id="teamPin" placeholder="e.g., 1234" required>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Hackathon Idea Section -->
+                        <section class="form-card idea-section">
+                            <h2>The Big Idea</h2>
+                            <div class="form-group">
+                                <label for="ideaTitle">Project Title *</label>
+                                <input type="text" id="ideaTitle" required>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="ideaDescription">Short Description *</label>
+                                <textarea id="ideaDescription" rows="3" required></textarea>
+                            </div>
+                        </section>
+
+                        <!-- Leader Section (The Ross) -->
+                        <section class="form-card leader-section">
+                            <h2>The Ross (Team Leader 1)</h2>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Name *</label>
+                                    <input type="text" id="leaderName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email *</label>
+                                    <input type="email" id="leaderEmail" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Department *</label>
+                                    <input type="text" id="leaderDept" placeholder="e.g., CSE" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Enrollment Number *</label>
+                                    <input type="text" id="leaderEnroll" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Year *</label>
+                                    <select id="leaderYear" required>
+                                        <option value="" disabled selected>Select your year</option>
+                                        <option value="1st Year">1st Year</option>
+                                        <option value="2nd Year">2nd Year</option>
+                                        <option value="3rd Year">3rd Year</option>
+                                        <option value="4th Year">4th Year</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Discord ID *</label>
+                                    <input type="text" id="leaderDiscord" placeholder="e.g., pivotmaster" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Contact Number *</label>
+                                    <input type="tel" id="leaderContact" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>WhatsApp Number *</label>
+                                    <input type="tel" id="leaderWhatsapp" required>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Campus *</label>
+                                    <select id="leaderCampus" required>
+                                        <option value="" disabled selected>Select your campus</option>
+                                        <option value="IEM NEWTOWN">IEM NEWTOWN</option>
+                                        <option value="IEM SALTLAKE">IEM SALTLAKE</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Dynamic Team Members Container -->
+                        <div id="membersContainer"></div>
+
+                        <!-- Controls -->
+                        <div class="button-group">
+                            <button type="button" id="addMemberBtn" class="btn-secondary">+ I'll Be There For You (Add Member)</button>
+                            <button type="submit" id="submitBtn" class="btn-primary">PIVOT! (Submit Idea)</button>
+                        </div>
+                        <div id="statusMessage"></div>
+                    </form>
+
+                    <!-- VISUAL DIVIDER -->
+                    <div class="card-divider">☕ ~ Or Manage Existing ~ ☕</div>
+
+                    <!-- SECONDARY ACTIONS GRID -->
+                    <div class="secondary-actions-grid">
+                        
+                        <!-- Edit Registration Card -->
+                        <div class="form-card secondary-card">
+                            <h2>Edit Registration</h2>
+                            <p class="small-text">Add members to your team (Max 6 total).</p>
+                            <form id="editForm">
+                                <div class="form-group">
+                                    <label>Leader's Email</label>
+                                    <input type="email" id="editEmail" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Unique PIN</label>
+                                    <input type="password" id="editPin" required>
+                                </div>
+                                <button type="submit" class="btn-secondary">Unlock & Edit</button>
+                                <div id="editStatusMessage"></div>
+                            </form>
+                        </div>
+
+                        <!-- Check Registration Card -->
+                        <div class="form-card secondary-card">
+                            <h2>Check Status</h2>
+                            <p class="small-text">Verify your team's application.</p>
+                            <form id="checkForm">
+                                <div class="form-group">
+                                    <label>Leader's Email</label>
+                                    <input type="email" id="checkEmail" required>
+                                </div>
+                                <button type="submit" class="btn-primary">Check Registration</button>
+                                <div id="checkStatusMessage"></div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: HELP -->
+            <section id="help-section" class="content-section">
+                <div class="center-wrapper">
+                    <div class="info-card">
+                        <h2>Need Help? We're on a break.</h2>
+                        <p class="friends-quote">"Smelly bug, smelly bug, what are they coding you?"</p>
+                        <p>Just kidding. Reach out to our organizers if you get stuck, or if your code makes you want to cry like Rachel trying to make a trifle. Contact : Ipshita - 7044222721 | Vedanta - 9038101994 | Ujan - 9742509398 | Diprajit - 9875383377</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: FAQs -->
+            <section id="faq-section" class="content-section">
+                <div class="center-wrapper">
+                    <div class="info-card">
+                        <h2>FAQs</h2>
+                        <p class="friends-quote">"Could we BE anymore stuck on this logic?"</p>
+                        <p><strong>Q: How many people can be on a team?</strong><br>A: You can have a maximum of 6 members per team (1 Team Leader and up to 5 additional members). Just like the iconic crew at Central Perk, six is the magic number! You can also compete with a smaller team if you prefer.</p>
+
+                        <p><strong>Q: What if I don't have a full team yet?</strong><br>A: Don't worry, you won't be stuck playing "Bamboozled" alone! You can register your team now and use the Edit feature to add more friends later.</p>
+
+                        <p><strong>Q: Are cross-campus or cross-year teams allowed?</strong><br>A: Absolutely! Whether you are a 1st-year from IEM Saltlake or a 4th-year from IEM Newtown, you can team up. Mixing years and departments makes for the best projects.</p>
+
+                        <p><strong>Q: Do I need to be a coding expert to participate?</strong><br>A: Not at all! Pivot Point is a "build to learn" environment. Whether you are an AI/ML wizard or just starting in frontend, everyone is welcome!</p>
+
+                        <p><strong>Q: Can we write code before the hackathon starts?</strong><br>A: All code must be written during the official 8-hour event. You can brainstorm and create UI wireframes beforehand, but the actual coding begins when the clock starts.</p>
+
+                        <p><strong>Q: What should I bring to the event?</strong><br>A: Bring your laptop, charger, student ID, and any specific hardware you need, and plenty of enthusiasm. You may bring your own snacks and drinks!</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
