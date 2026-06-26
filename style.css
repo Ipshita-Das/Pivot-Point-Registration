@@ -37,11 +37,11 @@ body {
 }
 
 /* Background Image Classes */
-.bg-central-perk { background-image: linear-gradient(var(--overlay), var(--overlay)), url('assets/central_perk_bg.jpg.png'); }
-.bg-ross { background-image: linear-gradient(var(--overlay), var(--overlay)), url('assets/ross_paleontology_bg.jpg.png'); }
-.bg-monica { background-image: linear-gradient(var(--overlay), var(--overlay)), url('assets/monica_apartment_bg.jpg.png'); }
-.bg-phoebe { background-image: linear-gradient(var(--overlay), var(--overlay)), url('assets/phoebe_smelly_cat_bg.jpg.png'); }
-.bg-joeychan { background-image: linear-gradient(var(--overlay), var(--overlay)), url('assets/joey_chandler_bg.jpg.png'); }
+.bg-central-perk { background-image: linear-gradient(var(--overlay), var(--overlay)), url('assets/central_perk_bg.jpg.jpg'); }
+.bg-ross { background-image: linear-gradient(var(--overlay), var(--overlay)), url('assets/ross_paleontology_bg.jpg.jpg'); }
+.bg-monica { background-image: linear-gradient(var(--overlay), var(--overlay)), url('assets/monica_apartment_bg.jpg.jpg'); }
+.bg-phoebe { background-image: linear-gradient(var(--overlay), var(--overlay)), url('assets/phoebe_smelly_cat_bg.jpg.jpg'); }
+.bg-joeychan { background-image: linear-gradient(var(--overlay), var(--overlay)), url('assets/joey_chandler_bg.jpg.jpg'); }
 
 /* --- TITLE STYLING --- */
 .friends-title {
@@ -340,6 +340,24 @@ button:active { transform: scale(0.98); }
 .secondary-card button { margin-top: 10px; width: 100%; }
 
 #editStatusMessage, #checkStatusMessage { margin-top: 15px; text-align: center; font-weight: bold; padding: 10px; border-radius: 4px; font-size: 1.1rem; }
+
+/* --- MENU CLICK HINT --- */
+.click-here-hint {
+    font-family: 'Gloria Hallelujah', cursive;
+    color: var(--frame-yellow);
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-left: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    pointer-events: none; /* So they can click through it */
+    animation: pointBounce 1.5s infinite;
+}
+
+/* Adds a subtle side-to-side bouncing animation */
+@keyframes pointBounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-10px); color: white; }
+}
 
 @media (max-width: 768px) {
     .form-grid { grid-template-columns: 1fr; }

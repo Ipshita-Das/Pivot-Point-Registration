@@ -1,24 +1,39 @@
-// --- 1. IMPORT FIREBASE ---
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getFirestore, doc, setDoc, collection, query, where, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+// --- 1. GOOGLE SHEETS API & LEGACY CACHE ---
+// PASTE YOUR NEW WEB APP URL HERE:
+const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbwMP-OJMwrra6o_TJIpH5aSSKyiULSa4m75tEC1DZ4riM_GHmHh2jUPJ9W_vIakmiBFKQ/exec";
 
-// --- 2. YOUR FIREBASE CONFIG ---
-// PASTE YOUR DETAILS FROM THE FIREBASE CONSOLE HERE:
-const firebaseConfig = {
-    apiKey: "AIzaSyDd87f86gL3YsGPGPIbYtUoJxWMBFx8xHs",
-    authDomain: "pivot-point-registration.firebaseapp.com",
-    projectId: "pivot-point-registration",
-    storageBucket: "pivot-point-registration.firebasestorage.app",
-    messagingSenderId: "24860503102",
-    appId: "1:24860503102:web:aca00d94a82cbf9deb756f"
+const legacyTeams = {
+    "sukhenmandal836@gmail.com": "APPIFY US",
+    "dipanlahiri207official@gmail.com": "Binary_Brain",
+    "samitgupta.dev@gmail.com": "Blueprint Zero",
+    "debkantaruj703@gmail.com": "BUGS",
+    "abjinighosal01@gmail.com": "Byte & Bloom",
+    "soumyadeepjana9564@gmail.com": "ByteHealers",
+    "tirnade@gmail.com": "Code Crafters",
+    "sahamontro@gmail.com": "Friends with Functions",
+    "oyesheedutta24@gmail.com": "JusHackers",
+    "tamosadey11@gmail.com": "Lobsters",
+    "dasarchisman21@gmail.com": "Unemployable Khargosh",
+    "rochishnu.dutta3127@gmail.com": "Mango Bytes",
+    "jaiswalrudrans@gmail.com": "Neural Overdrive",
+    "kounakmajumder@gmail.com": "Novo",
+    "joyghatak0099@gmail.com": "Nyaya Nexus",
+    "sghatak.cyber@gmail.com": "Pentagon",
+    "aishsharma01022005@gmail.com": "Phoenix",
+    "gsaha5911@gmail.com": "Royal Coders",
+    "ankitamandal471@gmail.com": "Slay Queens",
+    "sudhakar.knapsack@gmail.com": "SYNTAX SQUAD",
+    "saikatmohis.slsn10b@gmail.com": "Team_Losers",
+    "rahuldev7857@gmail.com": "Tech-Eagles",
+    "sarkar.anju2004@gmail.com": "Tensor Titans",
+    "irishakaran@gmail.com": "The Chandler",
+    "prisharoychaudhuri@gmail.com": "Tufan",
+    "sr5863183@gmail.com": "Twinkling Star",
+    "chandrachurdhar93@gmail.com": "Wildstone"
 };
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- UI & Navigation Logic ---
     const sidebar = document.getElementById('sidebar');
     const openBtn = document.getElementById('openSidebar');
     const closeBtn = document.getElementById('closeSidebar');
@@ -56,11 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Dynamic Form & Edit State Logic ---
     const MAX_ADDITIONAL_MEMBERS = 5; 
     let currentMembers = 0;
-    let isEditing = false; // Tracks if we are creating or updating
-    let editDocumentId = null; // Stores the specific database ID we are editing
+    let isEditing = false; 
+    let editDocumentId = null; 
     const friendsNames = ['The Rachel', 'The Monica', 'The Chandler', 'The Joey', 'The Phoebe'];
 
     const membersContainer = document.getElementById('membersContainer');
@@ -139,15 +153,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- MAIN REGISTRATION SUBMISSION (CREATE OR UPDATE) ---
+    // --- MAIN REGISTRATION SUBMISSION (GOOGLE SHEETS) ---
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const teamName = document.getElementById('teamName').value.trim();
-        // If creating new, generate an ID. If editing, we use the existing editDocumentId.
-        const documentId = isEditing ? editDocumentId : teamName.toLowerCase().replace(/\s+/g, '-'); 
 
         const payload = {
+            rowNumber: isEditing ? editDocumentId : null, 
             team: {
                 name: teamName,
                 pin: document.getElementById('teamPin').value,
@@ -186,58 +199,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             statusMessage.className = '';
-            statusMessage.innerText = isEditing ? 'Updating Database... Pivot!' : 'Submitting... Pivot!';
+            statusMessage.innerText = isEditing ? 'Updating Google Sheets... Pivot!' : 'Submitting to Google Sheets... Pivot!';
             
-            if (isEditing) {
-                await updateDoc(doc(db, "registrations", documentId), payload);
+            // Notice the new headers here!
+            const response = await fetch(GOOGLE_SHEETS_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8',
+                },
+                body: JSON.stringify(payload) 
+            });
+            
+            const result = await response.json();
+
+            if (result.result === "success") {
                 statusMessage.className = 'success';
-                statusMessage.innerText = 'Could this BE any more updated? Changes Saved!';
+                statusMessage.innerText = isEditing ? 'Could this BE any more updated? Changes Saved!' : 'Could this BE any more successful? Team Registered!';
             } else {
-                await setDoc(doc(db, "registrations", documentId), payload);
-                statusMessage.className = 'success';
-                statusMessage.innerText = 'Could this BE any more successful? Team Registered!';
+                throw new Error(result.error);
             }
 
-            // Reset everything back to normal mode
             form.reset();
             membersContainer.innerHTML = '';
             currentMembers = 0;
             addMemberBtn.disabled = false;
             addMemberBtn.innerText = "+ I'll Be There For You (Add Member)";
-            submitBtn.innerText = "PIVOT! (Submit Idea)"; // Reset button text
+            submitBtn.innerText = "PIVOT! (Submit Idea)"; 
             isEditing = false;
             editDocumentId = null;
 
         } catch (error) {
-            console.error('Firebase Error:', error);
+            console.error('Submission Error:', error);
             statusMessage.className = 'error';
             statusMessage.innerText = "Uh oh. We were on a break! Check console for details.";
         }
     });
 
-    // --- CHECK REGISTRATION STATUS ---
+    // --- CHECK REGISTRATION STATUS (HYBRID: CACHE + SHEETS) ---
     document.getElementById('checkForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const msgBox = document.getElementById('checkStatusMessage');
-        const email = document.getElementById('checkEmail').value.trim();
+        const email = document.getElementById('checkEmail').value.trim().toLowerCase();
+
+        msgBox.className = '';
+        msgBox.innerText = 'Searching the database...';
+
+        if (legacyTeams[email]) {
+            msgBox.className = 'success';
+            msgBox.innerHTML = `Found it! Team <strong>${legacyTeams[email]}</strong> is registered! Your registration has already been confirmed.`;
+            return;
+        }
 
         try {
-            msgBox.className = '';
-            msgBox.innerText = 'Searching the database...';
+            const response = await fetch(`${GOOGLE_SHEETS_API_URL}?email=${encodeURIComponent(email)}`);
+            const json = await response.json();
 
-            const q = query(collection(db, "registrations"), where("leader.email", "==", email));
-            const querySnapshot = await getDocs(q);
-
-            if (querySnapshot.empty) {
+            if (json.result === "not_found") {
                 msgBox.className = 'error';
                 msgBox.innerText = "No team found with this Leader Email.";
+            } else if (json.result === "success") {
+                const totalMembers = json.data.members.length + 1;
+                msgBox.className = 'success';
+                msgBox.innerHTML = `Found it! Team <strong>${json.data.team.name}</strong> is registered with ${totalMembers}/6 members.`;
             } else {
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const totalMembers = data.members.length + 1; // +1 for the Leader
-                    msgBox.className = 'success';
-                    msgBox.innerHTML = `Found it! Team <strong>${data.team.name}</strong> is registered with ${totalMembers}/6 members.`;
-                });
+                throw new Error("Server error");
             }
         } catch (error) {
             console.error(error);
@@ -246,54 +271,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- EDIT REGISTRATION (FETCH & POPULATE MAIN FORM) ---
+    // --- EDIT REGISTRATION (GOOGLE SHEETS API) ---
     document.getElementById('editForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const editFormRef = document.getElementById('editForm');
         const msgBox = document.getElementById('editStatusMessage');
-        const email = document.getElementById('editEmail').value.trim();
+        const email = document.getElementById('editEmail').value.trim().toLowerCase();
         const pin = document.getElementById('editPin').value;
 
         try {
             msgBox.className = '';
-            msgBox.innerText = 'Verifying credentials...';
+            msgBox.innerText = 'Verifying credentials with server...';
 
-            const q = query(collection(db, "registrations"), where("leader.email", "==", email));
-            const querySnapshot = await getDocs(q);
+            const response = await fetch(`${GOOGLE_SHEETS_API_URL}?email=${encodeURIComponent(email)}`);
+            const json = await response.json();
 
-            if (querySnapshot.empty) {
+            if (json.result === "not_found") {
                 msgBox.className = 'error';
                 msgBox.innerText = "Leader Email not found.";
                 return;
             }
 
-            let teamData = null;
-            let documentId = null;
+            const teamData = json.data;
 
-            querySnapshot.forEach((doc) => {
-                teamData = doc.data();
-                documentId = doc.id;
-            });
-
-            if (teamData.team.pin !== pin) {
+            if (teamData.team.pin && String(teamData.team.pin) !== "no-pin" && String(teamData.team.pin) !== String(pin)) {
                 msgBox.className = 'error';
                 msgBox.innerText = "Incorrect PIN! We were on a break!";
                 return;
             } 
 
-            // --- SUCCESS! POPULATE THE MAIN FORM ---
-            
-            // 1. Enter Edit State
             isEditing = true;
-            editDocumentId = documentId;
+            editDocumentId = teamData.rowNumber; 
 
-            // 2. Populate Team & Idea Data
             document.getElementById('teamName').value = teamData.team.name;
-            document.getElementById('teamPin').value = teamData.team.pin;
+            document.getElementById('teamPin').value = pin; 
             document.getElementById('ideaTitle').value = teamData.idea.title;
             document.getElementById('ideaDescription').value = teamData.idea.description;
 
-            // 3. Populate Leader Data
             document.getElementById('leaderName').value = teamData.leader.name;
             document.getElementById('leaderEmail').value = teamData.leader.email;
             document.getElementById('leaderDept').value = teamData.leader.department;
@@ -304,7 +318,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('leaderWhatsapp').value = teamData.leader.whatsapp;
             document.getElementById('leaderCampus').value = teamData.leader.campus;
 
-            // 4. Clear existing member UI and repopulate from database
             membersContainer.innerHTML = '';
             currentMembers = 0;
             addMemberBtn.disabled = false;
@@ -324,7 +337,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 section.querySelector('.member-campus').value = member.campus;
             });
 
-            // Update Add Button State
             if (currentMembers >= MAX_ADDITIONAL_MEMBERS) {
                 addMemberBtn.disabled = true;
                 addMemberBtn.innerText = "Team is full! (6/6 members)";
@@ -332,10 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 addMemberBtn.innerText = "+ I'll Be There For You (Add Member)";
             }
 
-            // 5. Change Main Submit Button
             submitBtn.innerText = "UPDATE PIVOT! (Save Changes)";
-
-            // 6. Provide feedback and scroll up
             msgBox.className = '';
             msgBox.innerText = '';
             editFormRef.reset();
