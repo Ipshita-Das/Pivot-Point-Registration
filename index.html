@@ -19,17 +19,19 @@
             background: rgba(255, 255, 255, 0.95);
             padding: 50px 30px;
             border-radius: 15px;
-            border: 4px solid var(--friends-blue, #0000ff); /* Falls back to standard blue if variable fails */
+            border: 4px solid var(--friends-blue, #0000ff); 
             text-align: center;
             max-width: 600px;
             box-shadow: 10px 10px 0px rgba(0,0,0,0.8);
         }
         .closed-card h1 {
-            font-family: 'Gloria Hallelujah', cursive;
+            /* Calling your custom Gabriel Weiss font */
+            font-family: 'Gabriel Weiss Friends Font', 'Gabriel Weiss', 'Gloria Hallelujah', cursive;
             color: var(--friends-red, #ff0000);
-            font-size: 3rem;
+            font-size: 3.5rem; 
             margin-top: 0;
             margin-bottom: 10px;
+            letter-spacing: 3px;
         }
         .closed-card h2 {
             font-family: 'Inter', sans-serif;
@@ -55,10 +57,17 @@
 <body class="bg-central-perk">
     <div class="closed-container">
         <div class="closed-card">
-            <h1>PIVOT POINT</h1>
+            
+            <!-- Added the colored dots back in for the authentic look -->
+            <h1>
+                P<span style="color: var(--friends-red, #ff0000);">•</span>I<span style="color: var(--friends-blue, #0000ff);">•</span>V<span style="color: var(--friends-yellow, #ffcc00);">•</span>O<span style="color: var(--friends-red, #ff0000);">•</span>T
+                <br>
+                P<span style="color: var(--friends-blue, #0000ff);">•</span>O<span style="color: var(--friends-yellow, #ffcc00);">•</span>I<span style="color: var(--friends-red, #ff0000);">•</span>N<span style="color: var(--friends-blue, #0000ff);">•</span>T
+            </h1>
+            
             <h2>Registrations Closed</h2>
             <p>Thank you to everyone who registered! The shortlisted teams will be announced soon. The application window for this event is now officially closed.</p>
-            <p class="friends-joke">"We are on a break... from taking new teams!"</p>
+            <p class="friends-joke">"We were on a break... from taking new teams!"</p>
         </div>
     </div>
 </body>
