@@ -6,6 +6,84 @@
     <title>Pivot Point Hackathon</title>
     <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Meet Our Sponsors Marquee Styles */
+        .sponsors-wrapper {
+            margin-top: 60px;
+            width: 100%;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            border-radius: 12px;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.8);
+            border: 3px solid #ffcc00; /* Friends yellow */
+            overflow: hidden;
+        }
+
+        .sponsors-title {
+            font-family: 'Gloria Hallelujah', cursive;
+            text-align: center;
+            font-size: 1.8rem;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            /* 20s for a smooth, readable scrolling speed */
+            animation: marquee 20s linear infinite; 
+        }
+
+        /* Pauses the scrolling when a user hovers over it */
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .sponsor-card {
+            display: inline-flex;
+            align-items: center;
+            margin: 0 35px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .sponsor-logo-placeholder {
+            width: 50px;
+            height: 50px;
+            background-color: #f0f0f0;
+            border: 2px dashed #999;
+            border-radius: 8px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .sponsor-logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ensures logos maintain their aspect ratio */
+        }
+
+        .sponsor-card strong {
+            color: #0000ff; /* Friends blue */
+        }
+    </style>
 </head>
 <body id="main-body" class="bg-central-perk">
 
@@ -45,6 +123,66 @@
                         P<span class="dot blue">•</span>O<span class="dot yellow">•</span>I<span class="dot red">•</span>N<span class="dot blue">•</span>T
                     </h1>
                     <h3 class="tagline">Could this BE any more innovative?</h3>
+                </div>
+
+                <!-- NEW SPONSORS TICKER -->
+                <div class="sponsors-wrapper">
+                    <h3 class="sponsors-title">Meet Our Sponsors</h3>
+                    <div class="marquee-container">
+                        <div class="marquee-content">
+                            <!-- Group 1 -->
+                            <div class="sponsor-card">
+                                <div class="sponsor-logo-placeholder">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOx7ibUueQUyiF2qfciZahn1DemCYTx3yi6MkkypQSG7T-cmARfJBjOZbV&s=10" alt="Rentigo Logo">
+                                </div>
+                                <span><strong>Mobility sponsor</strong> - Rentigo</span>
+                            </div>
+                            <div class="sponsor-card">
+                                <div class="sponsor-logo-placeholder">
+                                    <img src="https://www.hacknest.co.in/hacknest-logo.png" alt="HackNest Logo">
+                                </div>
+                                <span><strong>Technical sponsor</strong> - HackNest</span>
+                            </div>
+                            <div class="sponsor-card">
+                                <div class="sponsor-logo-placeholder">
+                                    <img src="https://ik.imagekit.io/3toclb9et/2.png?updatedAt=1759691211226" alt="Zynvosocial Logo">
+                                </div>
+                                <span><strong>Community partner</strong> - Zynvosocial</span>
+                            </div>
+                            <div class="sponsor-card">
+                                <div class="sponsor-logo-placeholder">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXvwtFjgBuBTs8bCnxscb-XmraM12J_I7otRznfGXhEc8kMb_WsaslBWPa&s=10" alt="Mercy for Animals Logo">
+                                </div>
+                                <span><strong>Goodies partner</strong> - Mercy for Animals</span>
+                            </div>
+
+                            <!-- Group 2 (Duplicated for a seamless infinite scroll) -->
+                            <div class="sponsor-card">
+                                <div class="sponsor-logo-placeholder">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOx7ibUueQUyiF2qfciZahn1DemCYTx3yi6MkkypQSG7T-cmARfJBjOZbV&s=10" alt="Rentigo Logo">
+                                </div>
+                                <span><strong>Mobility sponsor</strong> - Rentigo</span>
+                            </div>
+                            <div class="sponsor-card">
+                                <div class="sponsor-logo-placeholder">
+                                    <img src="https://www.hacknest.co.in/hacknest-logo.png" alt="HackNest Logo">
+                                </div>
+                                <span><strong>Technical sponsor</strong> - HackNest</span>
+                            </div>
+                            <div class="sponsor-card">
+                                <div class="sponsor-logo-placeholder">
+                                    <img src="https://ik.imagekit.io/3toclb9et/2.png?updatedAt=1759691211226" alt="Zynvosocial Logo">
+                                </div>
+                                <span><strong>Community partner</strong> - Zynvosocial</span>
+                            </div>
+                            <div class="sponsor-card">
+                                <div class="sponsor-logo-placeholder">
+                                    <img src="" alt="Mercy for Animals Logo">
+                                </div>
+                                <span><strong>Goodies partner</strong> - Mercy for Animals</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
